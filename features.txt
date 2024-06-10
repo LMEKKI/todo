@@ -1,0 +1,14 @@
+- creation d'une todo
+- surligner une todo
+- supprimer une todo
+- ajouter un bouton supprimer sur une todo
+- ajouter un bouton fini ( surligner) sur une todo
+- variale  TODO qui compte le nombre de todo actif ( méme surligner)
+- incrementer la variable TODO a l'ajout d'une todo
+- decrementer la variable TODO lors de la suppresion d'une todo
+- incrementer le valeur a droit a coté de la variable todo
+- decrementer le valeur a droit a coté de la variable todo
+
+------------------ optionel ( en vrai obligatoire) ------------------------
+
+utilisation du local storage pour stocker les todo

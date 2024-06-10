@@ -13,3 +13,16 @@ body {
   align-items: center;
   justify-content: space-around;
 }
+
+.completed p {
+  text-decoration: line-through;
+  font-size: larger;
+}
+
+.todoDiv {
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
