@@ -1,7 +1,24 @@
 const todo_section = document.querySelector(".todo_section");
 const todo_input = document.querySelector("#todo_input");
 const addBtn = document.querySelector("#addBtn");
+const numOfTodoText = document.querySelector(".num_of_todo");
+let numOfTodo = 0;
+let numOfTodoCompleted = 0;
+function numOfTodoCompletedminus() {
+  numOfTodoCompleted--;
+}
 
+function numOfTodoCompletedPlus(p) {
+  numOfTodoCompleted++;
+}
+
+function numOfTodominus() {
+  numOfTodo -= 1;
+}
+
+function numOfTodoPlus(p) {
+  numOfTodo++;
+}
 function creatTodo() {
   let todoDiv = document.createElement("div");
   let completedTodo = document.createElement("button");
@@ -19,21 +36,35 @@ function creatTodo() {
   todoDiv.appendChild(todoText);
   todoDiv.appendChild(completedTodo);
   todoDiv.appendChild(deleteTodo);
+  numOfTodoText.textContent = `${numOfTodoCompleted} sur ${numOfTodo}`;
+
+  deleteTodo.addEventListener("click", (e) => {
+    e.preventDefault(); // Cancel the native event
+    e.stopPropagation(); // Don't bubble/capture the event any further
+    numOfTodominus();
+    todoDiv.remove();
+    numOfTodoText.textContent = `${numOfTodoCompleted} sur ${numOfTodo}`;
+  });
+
+  completedTodo.addEventListener("click", (e) => {
+    e.preventDefault(); // Cancel the native event
+    e.stopPropagation(); // Don't bubble/capture the event any further
+    if (todoText.classList.contains("completed") && numOfTodoCompleted > 0) {
+      numOfTodoCompletedminus();
+    } else {
+      numOfTodoCompletedPlus();
+    }
+    todoText.classList.toggle("completed");
+    numOfTodoText.textContent = `${numOfTodoCompleted} sur ${numOfTodo}`;
+  });
+
   todo_section.appendChild(todoDiv);
 }
 
 addBtn.addEventListener("click", (e) => {
   e.preventDefault(); // Cancel the native event
   e.stopPropagation(); // Don't bubble/capture the event any further
-  creatTodo();
-});
+  numOfTodoPlus();
 
-document.addEventListener("click", function (e) {
-  let t = e.target.querySelector("todoDiv");
-  const todo = e.target.closets("completedTodo");
-  e.preventDefault(); // Cancel the native event
-  e.stopPropagation(); // Don't bubble/capture the event any further
-  if (todo) {
-    todo.removeChild(t);
-  }
+  creatTodo();
 });
