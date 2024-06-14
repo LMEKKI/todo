@@ -2,69 +2,62 @@ const todo_section = document.querySelector(".todo_section");
 const todo_input = document.querySelector("#todo_input");
 const addBtn = document.querySelector("#addBtn");
 const numOfTodoText = document.querySelector(".num_of_todo");
-let numOfTodo = 0;
-let numOfTodoCompleted = 0;
-function numOfTodoCompletedminus() {
-  numOfTodoCompleted--;
-}
+allMyTodos = [];
 
-function numOfTodoCompletedPlus(p) {
-  numOfTodoCompleted++;
-}
+// init html variables
+let todoDiv;
+let completedBtn;
+let deleteBtn;
+let todoText;
 
-function numOfTodominus() {
-  numOfTodo -= 1;
-}
-
-function numOfTodoPlus(p) {
-  numOfTodo++;
-}
+// function deletCurrentTodo(currentTarget) {
+//   Event.preventDefault(); // Cancel the native event
+//   Event.stopPropagation();
+//   numOfTodominus();
+//   p.remove();
+//   numOfTodoText.textContent = `${numOfTodoCompleted} sur ${numOfTodo}`;
+// }
 function creatTodo() {
-  let todoDiv = document.createElement("div");
-  let completedTodo = document.createElement("button");
-  let deleteTodo = document.createElement("button");
-  let todoText = document.createElement("p");
-
+  // init html structure
+  todoDiv = document.createElement("div");
+  completedBtn = document.createElement("button");
+  deleteBtn = document.createElement("button");
+  todoText = document.createElement("p");
+  // add class to all html elements
   todoDiv.classList.add("todoDiv");
-  completedTodo.classList.add("completedTodo");
-  deleteTodo.classList.add("deleteTodo");
-  completedTodo.textContent = "Completed";
-  deleteTodo.textContent = "delete Todo";
-
+  completedBtn.classList.add("completedBtn");
+  deleteBtn.classList.add("deleteBtn");
   todoText.classList.add("todoText");
+  // add text value on some html structure
+  completedBtn.textContent = "Completed";
+  deleteBtn.textContent = "delete Todo";
   todoText.textContent = todo_input.value;
+  // append all html elements
   todoDiv.appendChild(todoText);
-  todoDiv.appendChild(completedTodo);
-  todoDiv.appendChild(deleteTodo);
-  numOfTodoText.textContent = `${numOfTodoCompleted} sur ${numOfTodo}`;
+  todoDiv.appendChild(completedBtn);
+  todoDiv.appendChild(deleteBtn);
 
-  deleteTodo.addEventListener("click", (e) => {
-    e.preventDefault(); // Cancel the native event
-    e.stopPropagation(); // Don't bubble/capture the event any further
-    numOfTodominus();
-    todoDiv.remove();
-    numOfTodoText.textContent = `${numOfTodoCompleted} sur ${numOfTodo}`;
-  });
-
-  completedTodo.addEventListener("click", (e) => {
+  // adding EventListener on All todo Buttons
+  completedBtn.addEventListener("click", (e) => {
     e.preventDefault(); // Cancel the native event
     e.stopPropagation(); // Don't bubble/capture the event any further
     if (todoText.classList.contains("completed") && numOfTodoCompleted > 0) {
-      numOfTodoCompletedminus();
     } else {
-      numOfTodoCompletedPlus();
     }
     todoText.classList.toggle("completed");
-    numOfTodoText.textContent = `${numOfTodoCompleted} sur ${numOfTodo}`;
   });
 
+  // append todoDiv   this contain all todo element  1 todo = 1 div
   todo_section.appendChild(todoDiv);
+  // add created todo to my table
+  allMyTodos.push(todoDiv);
 }
 
+// btn to creat todo
 addBtn.addEventListener("click", (e) => {
   e.preventDefault(); // Cancel the native event
   e.stopPropagation(); // Don't bubble/capture the event any further
-  numOfTodoPlus();
 
   creatTodo();
+  console.log(allMyTodos);
 });
