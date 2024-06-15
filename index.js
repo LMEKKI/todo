@@ -1,8 +1,10 @@
 const todo_section = document.querySelector(".todo_section");
 const todo_input = document.querySelector("#todo_input");
 const addBtn = document.querySelector("#addBtn");
-const numOfTodoText = document.querySelector(".num_of_todo");
+const nbrOfTodoDone = document.querySelector(".nbrOfTodoDone");
 allMyTodos = [];
+// genere un ID unique  pour les todoDiv( ne pas depasser 10000 risque de collission)
+const uniqueId = Math.random().toString(36).substring(2, 9);
 
 // init html variables
 let todoDiv;
@@ -25,6 +27,7 @@ function creatTodo() {
   todoText = document.createElement("p");
   // add class to all html elements
   todoDiv.classList.add("todoDiv");
+  todoDiv.setAttribute("id", uniqueId);
   completedBtn.classList.add("completedBtn");
   deleteBtn.classList.add("deleteBtn");
   todoText.classList.add("todoText");
@@ -32,27 +35,19 @@ function creatTodo() {
   completedBtn.textContent = "Completed";
   deleteBtn.textContent = "delete Todo";
   todoText.textContent = todo_input.value;
+  nbrOfTodoDone.textContent = allMyTodos.length + 1;
   // append all html elements
   todoDiv.appendChild(todoText);
   todoDiv.appendChild(completedBtn);
   todoDiv.appendChild(deleteBtn);
-
-  // adding EventListener on All todo Buttons
-  completedBtn.addEventListener("click", (e) => {
-    e.preventDefault(); // Cancel the native event
-    e.stopPropagation(); // Don't bubble/capture the event any further
-    if (todoText.classList.contains("completed") && numOfTodoCompleted > 0) {
-    } else {
-    }
-    todoText.classList.toggle("completed");
-  });
-
   // append todoDiv   this contain all todo element  1 todo = 1 div
   todo_section.appendChild(todoDiv);
   // add created todo to my table
   allMyTodos.push(todoDiv);
 }
-
+allMyTodos.forEach((todo) => {
+  todo.addEventListener("click", console.log("salut"));
+});
 // btn to creat todo
 addBtn.addEventListener("click", (e) => {
   e.preventDefault(); // Cancel the native event
