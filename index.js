@@ -11,14 +11,17 @@ let todoDiv;
 let completedBtn;
 let deleteBtn;
 let todoText;
+addGlobalEventListener("click", ".deleteBtn", (e) => {
+  console.log("ouiiiiii");
+});
 
-// function deletCurrentTodo(currentTarget) {
-//   Event.preventDefault(); // Cancel the native event
-//   Event.stopPropagation();
-//   numOfTodominus();
-//   p.remove();
-//   numOfTodoText.textContent = `${numOfTodoCompleted} sur ${numOfTodo}`;
-// }
+function addGlobalEventListener(type, selector, callback) {
+  document.addEventListener(type, (e) => {
+    e.preventDefault();
+
+    if (e.target.matches(selector)) callback(e);
+  });
+}
 function creatTodo() {
   // init html structure
   todoDiv = document.createElement("div");
@@ -45,14 +48,13 @@ function creatTodo() {
   // add created todo to my table
   allMyTodos.push(todoDiv);
 }
-allMyTodos.forEach((todo) => {
-  todo.addEventListener("click", console.log("salut"));
-});
+
 // btn to creat todo
 addBtn.addEventListener("click", (e) => {
   e.preventDefault(); // Cancel the native event
   e.stopPropagation(); // Don't bubble/capture the event any further
 
   creatTodo();
+
   console.log(allMyTodos);
 });
