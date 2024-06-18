@@ -12,7 +12,7 @@ let completedBtn;
 let deleteBtn;
 let todoText;
 addGlobalEventListener("click", ".deleteBtn", (e) => {
-  console.log("ouiiiiii");
+  removeTodo(e);
 });
 
 function addGlobalEventListener(type, selector, callback) {
@@ -21,6 +21,10 @@ function addGlobalEventListener(type, selector, callback) {
 
     if (e.target.matches(selector)) callback(e);
   });
+}
+
+function removeTodo(e) {
+  e.target.parentElement.remove();
 }
 function creatTodo() {
   // init html structure
