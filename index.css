@@ -14,7 +14,7 @@ body {
   justify-content: space-around;
 }
 
-.completed {
+.completed p {
   text-decoration: line-through;
   font-size: larger;
 }
